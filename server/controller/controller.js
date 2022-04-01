@@ -18,7 +18,7 @@ exports.create = (req,res)=>{
         // res.send(data)
         res.redirect('index')
     }).catch(err =>{
-        err.status(500).send({
+        res.status(500).send({
             message:err.message || "Error During Creation ......"
         });
     });
@@ -42,6 +42,30 @@ exports.find = (req,res)=>{
             res.send(user)
         }).catch(err =>{
             res.status(500).send({
+                message:err.message || "Error During Searching.."
+            })
+        });
+    }
+}
+
+exports.findById = (req,res)=>{
+
+    if(req.params.id){
+    const id = req.params.id;
+    UserDb.findById(id).then(data =>{
+        if(!data){
+           return res.status(404).send({message:`User Not Found ${id}`})
+        }else{
+        //    return res.send(data)
+            return res.render('update_user',{userData:data});
+        }}).catch(err =>{
+           return res.status(500).send({message:"Error .."});
+        });
+    }else{
+        UserDb.find().then(user =>{
+            return res.send(user)
+        }).catch(err =>{
+            return res.status(500).send({
                 message:err.message || "Error During Searching.."
             })
         });

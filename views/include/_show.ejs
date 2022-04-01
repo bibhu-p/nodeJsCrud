@@ -6,16 +6,25 @@
         <td><%= users[i].gender %></td>
         <td><%= users[i].status %></td>
         <td>
-            <!-- <input type="hidden" id="dbId" ><%= users[i]._id %></input> -->
+            <!-- <button onclick="getData('<%= users[i]._id %>')" class="btn update"><i class="fas fa-pencil-alt"></i></button> -->
+            <button onclick="deleteData('<%= users[i]._id %>')" class="btn  update"><i class="fas fa-times"></i></button>
+            <!-- <p style="display: none;" id="dbId" ><%= users[i]._id %></p>
             <button onclick="showData()" class="btn border-shadow update">
                 <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
-            </button>
+            </button> -->
             <!-- <a href="/update-user" class="btn border-shadow update">
                 <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
             </a> -->
-            <a class="btn border-shadow delete" data-id=<%= users[i]._id %> >
+            <!-- <a class="btn border-shadow delete" data-id=<%= users[i]._id %> >
                 <span class="text-gradient"><i class="fas fa-times"></i></span>
-            </a>
+            </a> -->
+
+            <form action="/api/users/<%= users[i]._id %>" method="get">
+                <button type="submit" class="btn update"><i class="fas fa-pencil-alt"></i></button>
+            </form>
+
+
         </td>
+        
     </tr>
     <% } %>
